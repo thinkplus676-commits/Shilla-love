@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Shilla ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Courier New", monospace;
+      background: #000;
+      color: #0aff0a;
+      overflow: hidden;
+    }
+
+    /* Glowing hacker text */
+    .glow {
+      color: #0aff0a;
+      text-shadow: 0 0 10px #0aff0a, 0 0 20px #0aff0a, 0 0 30px #0aff0a;
+    }
+
+    /* Center card */
+    .card {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      max-width: 500px;
+      margin: 100px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0,255,0,0.3);
+      text-align: center;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Password screen */
+    #passwordScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #0aff0a;
+      z-index: 9999;
+    }
+
+    input {
+      padding: 12px;
+      width: 250px;
+      border: 2px solid #0aff0a;
+      background: #000;
+      color: #0aff0a;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      background: #0aff0a;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #0df80d;
+    }
+
+    /* Matrix background effect */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Screen -->
+  <div id="passwordScreen">
+    <h2 class="glow">ACCESS LOCKED</h2>
+    <p>Enter password to continue</p>
+    <input type="password" id="passInput" placeholder="Password..." />
+    <button onclick="checkPass()">Enter</button>
+    <p style="opacity:0.6; margin-top:10px; font-size:0.8rem;">Hint: it's something romantic 😏</p>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="YOUR_AUDIO_FILE_URL_HERE.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Matrix Effect -->
+  <canvas id="matrix"></canvas>
+
+  <!-- Main Content -->
+  <div class="card" id="content" style="display:none;">
+    <h1 class="glow">HELLO SHILLA ❤️</h1>
+    <p class="glow">
+      Access Granted.<br><br>
+      This message is from your beb.<br>
+      In every universe, in every timeline...<br><br>
+      <strong>You are my favorite person.</strong><br><br>
+      Welcome to the heart of the hacker who loves you.
+    </p>
+    <p class="glow">— From your beb 💕</p>
+  </div>
+
+  <script>
+    // Password check
+    function checkPass() {
+      const p = document.getElementById('passInput').value;
+      if (p.toLowerCase().trim() === "i love you") {
+        document.getElementById('passwordScreen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        document.getElementById('bgMusic').play();
+      } else {
+        alert("Incorrect password, beb.");
+      }
+    }
+
+    // Matrix effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const drops = Array(Math.floor(canvas.width / 15)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0aff0a";
+      ctx.font = "15px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * 15, drops[i] * 15);
+
+        if (drops[i] * 15 > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 35);
+  </script>
+
+</body>
+</html>
